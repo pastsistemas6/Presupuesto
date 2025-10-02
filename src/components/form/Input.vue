@@ -1,57 +1,84 @@
 <template>
   <div class="base-input">
-    <label v-if="label" :for="id" class="label">{{ label }}</label>
+    <label v-if="label" :for="id" :class="props.clase_label">{{ label }}</label>
     <input
-      :id="id"
-      :type="type"
-      :placeholder="placeholder"
-      :value="modelValue"
-      :disabled="disabled"
+      :id="props.id"
+      :type="props.type"
+      :placeholder="props.placeholder"
+      :value="props.modelValue"
+      :disabled="props.disabled"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="input"
+      :class="props.clase_input"
     />
-    <p v-if="error" class="error">{{ error }}</p>
+    <p v-if="error" class="error">{{ props.error }}</p>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { defineProps } from 'vue';
+
+const props = defineProps({
   modelValue: String,
   label: String,
   placeholder: String,
   type: { type: String, default: 'text' },
   id: String,
+  clase_input: String,
+  clase_label: String,
   error: String,
   disabled: Boolean,
 })
 
 defineEmits(['update:modelValue'])
+
 </script>
 
 <style scoped>
 .base-input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.label {
+.label1 {
   margin-bottom: 0.35rem;
   font-size: 17px;
   font-weight: 500;
   color: #545386;
 }
 
-.input {
+.label2 {
+  margin-bottom: 0.35rem;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5565;
+}
+
+.input1 {
   padding: 1rem 1rem;
   background-color: #ccca;
   border-radius: 10px;
   font-size: 1rem;
 }
 
-.input:focus {
+.input1:focus {
   outline: none;
   border-color: #6c47ff;
+}
+
+.input2 {
+  padding: 10px 15px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #d1d5dc;
+  font-size: 1rem;
+}
+
+.input2:focus {
+  outline: none;
+  border: 2px solid #545386;
 }
 
 .error {

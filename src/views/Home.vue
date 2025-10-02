@@ -1,11 +1,13 @@
 <template>
-  <Header1 />
-  <Drawer />
+  <Header1/>
+  <div class="fixed h-full transition-all duration-300" :class="drawer.isExpanded ? 'w-1/7' : 'w-20'">
+    <Drawer></Drawer>
+  </div>
   <div
-    class="pt-22 mr-5 transition-all duration-300"
-    :class="drawer.isExpanded ? 'w-10/12 ml-auto' : 'w-9/10 ml-auto'"
+    class="pt-22 pb-5 mr-5 transition-all duration-300"
+    :class="drawer.isExpanded ? 'w-9/11 ml-auto' : 'w-11/12 ml-auto'"
   >
-    <TaskBoard />
+    <RouterView></RouterView>
   </div>
 </template>
 

@@ -15,15 +15,17 @@
         label="Usuario"
         placeholder="Ingresa tu usuario"
         id="username"
-        class="w-full"
+        clase_input="input1"
+        clase_label="label1"
       />
       <Input
         v-model="password"
         label="Contraseña"
-        placeholder="••••••"
+        placeholder="••••••••"
         type="password"
         id="password"
-        class="w-full"
+        clase_input="input1"
+        clase_label="label1"
       />
     </div>
 
@@ -36,14 +38,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Button from '@/components/form/Button.vue'
-import Input from '@/components/form/Input.vue'
+import Button from '@/components/Form/Button.vue'
+import Input from '@/components/Form/Input.vue'
 
 const username = ref('')
 const password = ref('')
 const router = useRouter()
 
 const login = () => {
-  router.push({ name: 'home' })
+  router.push({ name: 'Main' })
 }
 </script>

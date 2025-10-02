@@ -1,0 +1,48 @@
+<template>
+  <div class="bg-gray-50 rounded-lg shadow-sm p-5 w-full">
+    <h2 class="text-xl font-bold mb-6 text-[#545386]">{{ title }}</h2>
+    <table class="w-full text-left flex flex-col">
+      <thead class="text-md border-y-2 border-y-gray-400 w-full px-3">
+        <tr class="grid grid-cols-6 w-full">
+          <th class="py-3 col-span-3">Proyecto</th>
+          <th class="py-3 col-span-1 text-center">Prioridad</th>
+          <th class="py-3 col-span-2 text-center">Presupuesto</th>
+        </tr>
+      </thead>
+      <tbody class="text-sm text-gray-800 w-full">
+        <tr v-for="(p, index) in projects" :key="index" class="border-b-2 border-b-gray-400 grid grid-cols-6 w-full">
+          <td class="py-3 pl-4 col-span-3">{{ p.nombre }}</td>
+          <td class="py-3 col-span-1 text-center font-semibold" :class="priorityClass(p.prioridad)">{{ p.prioridad }}</td>
+          <td class="py-3 col-span-2 text-center font-semibold">{{ formatCurrency(p.presupuesto) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  title: String,
+  projects: Array,
+})
+
+function priorityClass(p) {
+  if (p == 'BAJA') {
+    return 'text-green-500';
+  }
+  else if (p ==  'MEDIA') {
+    return 'text-yellow-500';
+  }
+  else if (p == 'ALTA') {
+    return 'text-red-500';
+  }
+
+  return 'text-gray-500';
+}
+
+function formatCurrency(n) {
+  return '$ ' + new Intl.NumberFormat('es-CO').format(n || 0)
+}
+</script>

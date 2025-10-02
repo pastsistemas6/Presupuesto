@@ -4,7 +4,7 @@
       {{ title }}
     </div>
     <div class="task-list">
-      <TaskCard v-for="task in tasks" :key="task.id" :text="task.text" :color="color" />
+      <TaskCard v-for="task in tasks" :key="task.id" :id="task.id" :text="task.text" :costo="task.costo" :color="color" />
     </div>
   </div>
 </template>
@@ -30,13 +30,14 @@ const colorClass = `header-${props.color}`
 }
 
 .column-header {
-  width: 80%;
+  width: 100%;
   text-align: center;
   font-weight: bold;
+  font-size: 24px;
   color: white;
-  padding: 1rem;
+  padding: 14px 15px;
   border-radius: 12px;
-  margin-bottom: 1rem;
+  margin-bottom: 30px;
 }
 
 .header-green {
@@ -52,9 +53,9 @@ const colorClass = `header-${props.color}`
 }
 
 .task-list {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10px;
 }
 </style>

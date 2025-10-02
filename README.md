@@ -42,3 +42,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Format with Prettier
+
+```sh
+npm run format
+```

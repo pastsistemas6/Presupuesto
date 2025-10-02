@@ -51,7 +51,7 @@ const handleMouseLeave = () => {
   >
     <!-- Contenedor del tooltip -->
     <div class="drawer-body pt-4">
-      <ul class="menu space-y-0.5 pb-6 p-0">
+      <ul class="menu space-y-0.5 pb-6 pr-3 p-0">
         <!-- Botón para alternar el estado del drawer -->
         <li
           class="relative hover:bg-white cursor-default!"
@@ -60,7 +60,7 @@ const handleMouseLeave = () => {
         >
           <!-- Logo y nombre de la finca -->
           <RouterLink
-            to="BodyLayout"
+            to="main"
             :class="[
               'flex flex-col justify-center px-4 py-3 items-center gap-0 hover:bg-white cursor-default! list-none',
               !drawer.isExpanded && 'px-2',
@@ -102,7 +102,7 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace al bodylayout -->
           <RouterLink
-            to="BodyLayout"
+            to="main"
             :class="[
               'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-4',
@@ -135,12 +135,12 @@ const handleMouseLeave = () => {
         <!-- Rutas y georeferencia -->
         <li
           class="relative"
-          @mouseenter="(e) => handleMouseEnter(e, 'Map')"
+          @mouseenter="(e) => handleMouseEnter(e, 'Proyectos')"
           @mouseleave="handleMouseLeave"
         >
           <!-- Enlace a rutas y georeferencia -->
           <RouterLink
-            to="map"
+            to="proyectos"
             :class="[
               'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
@@ -155,13 +155,13 @@ const handleMouseLeave = () => {
               />
             </span>
             <!-- Título del enlace -->
-            <span v-if="drawer.isExpanded" class="ml-2">Map</span>
+            <span v-if="drawer.isExpanded" class="ml-2">Proyectos</span>
           </RouterLink>
 
-          <!-- Tooltip para el enlace Map -->
+          <!-- Tooltip para el enlace Proyectos -->
           <Teleport to="#tooltip-container">
             <div
-              v-if="!drawer.isExpanded && activeTooltip?.text === 'Map'"
+              v-if="!drawer.isExpanded && activeTooltip?.text === 'Proyectos'"
               :style="activeTooltip.style"
               class="fixed z-50 bg-gray-200 text-sm px-2 py-1 rounded shadow-lg transition"
             >
@@ -170,15 +170,15 @@ const handleMouseLeave = () => {
           </Teleport>
         </li>
 
-        <!-- Biblioteca -->
+        <!-- Calculo -->
         <li
           class="relative"
-          @mouseenter="(e) => handleMouseEnter(e, 'Biblioteca')"
+          @mouseenter="(e) => handleMouseEnter(e, 'Calculo')"
           @mouseleave="handleMouseLeave"
         >
-          <!-- Enlace a biblioteca -->
+          <!-- Enlace a Calculo -->
           <RouterLink
-            to="biblioteca"
+            to="calculo"
             :class="[
               'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
@@ -188,13 +188,13 @@ const handleMouseLeave = () => {
               <img src="../icons/audit-morado-24px-01.svg" alt="" width="24" height="24" />
             </span>
             <!-- Título del enlace -->
-            <span v-if="drawer.isExpanded" class="ml-2">Biblioteca</span>
+            <span v-if="drawer.isExpanded" class="ml-2">Calculo</span>
           </RouterLink>
 
-          <!-- Tooltip para el enlace Biblioteca -->
+          <!-- Tooltip para el enlace Calculo -->
           <Teleport to="#tooltip-container">
             <div
-              v-if="!drawer.isExpanded && activeTooltip?.text === 'Biblioteca'"
+              v-if="!drawer.isExpanded && activeTooltip?.text === 'Calculo'"
               :style="activeTooltip.style"
               class="fixed z-50 bg-gray-200 text-sm px-2 py-1 rounded shadow-lg transition"
             >

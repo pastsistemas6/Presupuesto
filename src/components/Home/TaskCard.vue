@@ -1,26 +1,31 @@
 <template>
-  <div :class="['task-card', colorClass]">
-    {{ text }}
+  <div :class="['w-[99%] p-4 rounded-xl text-left flex justify-between items-center cursor-pointer hover:w-full hover:bg-gray-200! hover:duration-100', colorClass]" @click="enviar">
+    <p>{{ text }}</p>
+    <span class="py-1 px-2 bg-gray-100 rounded-md">{{ costo ? "$ " + costo : "$ 0" }}</span>
   </div>
 </template>
 
 <script setup>
+import { ref, defineProps } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 const props = defineProps({
+  id: Intl,
   text: String,
+  costo: Intl,
   color: { type: String, default: 'green' },
 })
 
 const colorClass = `card-${props.color}`
+
+function enviar() {
+  router.push({ name: 'Reportes' })
+}
 </script>
 
 <style scoped>
-.task-card {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  text-align: center;
-}
 
 .card-green {
   background-color: #dcf6d7;
