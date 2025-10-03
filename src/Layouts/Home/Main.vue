@@ -2,7 +2,10 @@
   <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
     <h2 class="w-full pl-8 text-4xl font-bold text-[#545386] mb-4">Resumen de presupuesto</h2>
     <p class="w-full px-8 pr-20 mb-8">
-      Elite Flower es una empresa líder en la industria de las flores, dedicada a la producción y exportación de flores de alta calidad. Este sistema de presupuestos permite gestionar y hacer seguimiento a los recursos financieros de los proyectos, facilitando el control del presupuesto estimado, ejecutado y real en todas las fincas.
+      Elite Flower es una empresa líder en la industria de las flores, dedicada a la producción y
+      exportación de flores de alta calidad. Este sistema de presupuestos permite gestionar y hacer
+      seguimiento a los recursos financieros de los proyectos, facilitando el control del
+      presupuesto estimado, ejecutado y real en todas las fincas.
     </p>
 
     <div class="w-full h-full px-6 flex flex-col gap-4">
@@ -23,7 +26,6 @@
 
       <ProjectTable title="Proyectos más costosos" :projects="topProjects" />
     </div>
-
   </div>
 </template>
 

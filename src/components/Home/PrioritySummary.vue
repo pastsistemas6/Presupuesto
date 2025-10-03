@@ -6,12 +6,12 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   title: String,
   count: Number,
-  type: { type: String, default: 'low' } // 'low', 'medium', 'high'
+  type: { type: String, default: 'low' }, // 'low', 'medium', 'high'
 })
 
 const bgClass = {

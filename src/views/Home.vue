@@ -1,6 +1,9 @@
 <template>
-  <Header1/>
-  <div class="fixed h-full transition-all duration-300" :class="drawer.isExpanded ? 'w-1/7' : 'w-20'">
+  <Header1 />
+  <div
+    class="fixed h-full transition-all duration-300"
+    :class="drawer.isExpanded ? 'w-1/7' : 'w-20'"
+  >
     <Drawer></Drawer>
   </div>
   <div

@@ -10,10 +10,18 @@
         </tr>
       </thead>
       <tbody class="text-sm text-gray-800 w-full">
-        <tr v-for="(p, index) in projects" :key="index" class="border-b-2 border-b-gray-400 grid grid-cols-6 w-full">
+        <tr
+          v-for="(p, index) in projects"
+          :key="index"
+          class="border-b-2 border-b-gray-400 grid grid-cols-6 w-full"
+        >
           <td class="py-3 pl-4 col-span-3">{{ p.nombre }}</td>
-          <td class="py-3 col-span-1 text-center font-semibold" :class="priorityClass(p.prioridad)">{{ p.prioridad }}</td>
-          <td class="py-3 col-span-2 text-center font-semibold">{{ formatCurrency(p.presupuesto) }}</td>
+          <td class="py-3 col-span-1 text-center font-semibold" :class="priorityClass(p.prioridad)">
+            {{ p.prioridad }}
+          </td>
+          <td class="py-3 col-span-2 text-center font-semibold">
+            {{ formatCurrency(p.presupuesto) }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -21,7 +29,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   title: String,
@@ -30,16 +38,14 @@ const props = defineProps({
 
 function priorityClass(p) {
   if (p == 'BAJA') {
-    return 'text-green-500';
-  }
-  else if (p ==  'MEDIA') {
-    return 'text-yellow-500';
-  }
-  else if (p == 'ALTA') {
-    return 'text-red-500';
+    return 'text-green-500'
+  } else if (p == 'MEDIA') {
+    return 'text-yellow-500'
+  } else if (p == 'ALTA') {
+    return 'text-red-500'
   }
 
-  return 'text-gray-500';
+  return 'text-gray-500'
 }
 
 function formatCurrency(n) {

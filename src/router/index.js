@@ -5,6 +5,7 @@ import TaskBoard from '@/Layouts/Home/TaskBoard.vue'
 import Report from '@/Layouts/Home/Report.vue'
 import Main from '@/Layouts/Home/Main.vue'
 import HojaCalculo from '@/Layouts/Home/HojaCalculo.vue'
+import PagesExterna from '@/Layouts/Home/PagesExterna.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,9 +40,14 @@ const router = createRouter({
           name: 'Calculo',
           component: HojaCalculo,
         },
-      ]
+        {
+          path: '/pages-externa/:name',
+          name: 'Pages externa',
+          component: PagesExterna,
+          props: true,
+        },
+      ],
     },
-
   ],
 })
 

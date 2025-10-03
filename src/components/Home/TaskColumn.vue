@@ -4,7 +4,14 @@
       {{ title }}
     </div>
     <div class="task-list">
-      <TaskCard v-for="task in tasks" :key="task.id" :id="task.id" :text="task.text" :costo="task.costo" :color="color" />
+      <TaskCard
+        v-for="task in tasks"
+        :key="task.id"
+        :id="task.id"
+        :text="task.text"
+        :costo="task.costo"
+        :color="color"
+      />
     </div>
   </div>
 </template>

@@ -20,40 +20,76 @@
           class="divide-x-2 divide-gray-200"
         >
           <td
-            v-for="(column, colIndex) in columns"
+            v-for="(column, colIndex) in props.columns"
             :key="colIndex"
-            class="px-4 py-3 whitespace-wrap text-center font-medium"
+            class="px-4 py-3 whitespace-wrap text-center font-medium cursor-pointer"
             :class="getCellClass_tbody(column.type)"
+            @click="openTransfer(row.project, column.value)"
           >
-            {{ formatValue(row[column.field],column.currency) }}
-            <Button
-  class="ml-2 text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded"
-  @click="openTransfer(row.project, 'enero')"
->
-  Transferir
-</Button>
+            {{ formatValue(row[column.field], column.currency) }}
           </td>
-
         </tr>
       </tbody>
     </table>
   </div>
+  <BudgetTransferModal
+    :visible="showModal"
+    :source="selectedTransfer"
+    :projects="projectList"
+    @close="showModal = false"
+    @transfer="handleTransfer"
+  />
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { ref, computed, defineProps } from 'vue'
+import BudgetTransferModal from './BudgetTransferModal.vue'
+import { columns } from '@/Services/columns'
 
 const props = defineProps({
   columns: Array,
-  rows: Array
+  rows: Array,
 })
 
-const formatValue = (value, currency) => {
+const showModal = ref(false)
+const selectedTransfer = ref(null)
 
+const projectList = computed(() => [...new Set(props.rows.map((r) => r.project))])
+
+const openTransfer = (project, month) => {
+  const row = props.rows.find((r) => r.project == project)
+  selectedTransfer.value = {
+    project,
+    month,
+    budget: row?.[`${month}_budget`] || 0,
+    real: row?.[`${month}_real`] || 0,
+  }
+  showModal.value = true
+}
+
+const handleTransfer = ({ amount, from, to }) => {
+  const origin = props.rows.find((r) => r.project === from.project)
+  const target = props.rows.find((r) => r.project === to.project)
+
+  if (!origin || !target) return
+
+  const fromKey = `${from.month}_budget`
+  const toKey = `${to.month}_budget`
+
+  // Validar si hay suficiente
+  if (origin[fromKey] < amount) return alert('Fondos insuficientes')
+
+  origin[fromKey] -= amount
+  target[toKey] += amount
+
+  // Recalcular totales si es necesario
+}
+
+const formatValue = (value, currency) => {
   if (currency == 'USD') {
     return `USD ${value.toLocaleString('en-US', {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     })}`
   }
 
@@ -62,7 +98,7 @@ const formatValue = (value, currency) => {
       style: 'currency',
       currency: 'COP',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     })
   }
 

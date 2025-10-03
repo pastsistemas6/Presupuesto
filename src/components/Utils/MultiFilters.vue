@@ -14,18 +14,15 @@
         class="absolute z-10 mt-2 w-72 divide-y-2 divide-gray-300 max-h-56 overflow-auto bg-white border-2 border-gray-400 rounded shadow-md px-3 py-2"
       >
         <div class="flex justify-between items-center">
-          <p
-            v-if="selectedProjects.length"
-            class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2"
-          >
-            Quitar filtro  ->
+          <p v-if="selectedProjects.length" class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2">
+            Quitar filtro ->
           </p>
           <Button
             v-if="selectedProjects.length"
             @click.stop="clearFilter('projects')"
             class="text-xs! text-red-400 p-0! mb-2"
           >
-            <img class="w-5" src="../icons/icons8-delete-100.png" alt="">
+            <img class="w-5" src="../icons/icons8-delete-100.png" alt="" />
           </Button>
         </div>
         <label
@@ -59,18 +56,15 @@
         class="absolute z-10 mt-2 w-54 max-h-56 divide-y-2 divide-gray-300 overflow-auto bg-white border-2 border-gray-400 rounded shadow-md px-3 py-2"
       >
         <div class="flex justify-between items-center">
-          <p
-            v-if="selectedMonths.length"
-            class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2"
-          >
-            Quitar filtro  ->
+          <p v-if="selectedMonths.length" class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2">
+            Quitar filtro ->
           </p>
           <Button
             v-if="selectedMonths.length"
             @click.stop="clearFilter('months')"
             class="text-xs! text-red-400 p-0! mb-2"
           >
-            <img class="w-5" src="../icons/icons8-delete-100.png" alt="">
+            <img class="w-5" src="../icons/icons8-delete-100.png" alt="" />
           </Button>
         </div>
         <label
@@ -97,7 +91,8 @@
       class="px-5! py-2.5! text-sm! rounded-md text-white"
       :class="{
         'bg-[#545386] hover:bg-[#3e3c61]': selectedProjects.length || selectedMonths.length,
-        'bg-gray-300 text-gray-500 cursor-not-allowed': !selectedProjects.length && !selectedMonths.length
+        'bg-gray-300 text-gray-500 cursor-not-allowed':
+          !selectedProjects.length && !selectedMonths.length,
       }"
     >
       Limpiar filtros
@@ -149,13 +144,13 @@ const months = [
 ]
 
 const uniqueProjects = computed(() => {
-  return [...new Set(props.rows.map(row => row.project))]
+  return [...new Set(props.rows.map((row) => row.project))]
 })
 
 const emitFilters = () => {
   emit('filter', {
     projects: selectedProjects.value,
-    months: selectedMonths.value
+    months: selectedMonths.value,
   })
 }
 

@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   title: String,
@@ -18,6 +18,6 @@ const valueClass = {
   success: 'text-green-600!',
   danger: 'text-red-600!',
   info: 'text-blue-600!',
-  default: 'text-gray-800'
+  default: 'text-gray-800',
 }[props.type]
 </script>

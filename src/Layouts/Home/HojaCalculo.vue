@@ -1,22 +1,33 @@
 <script setup>
 import DataTable from '@/components/Utils/DataTable.vue'
 import MultiFilters from '@/components/Utils/MultiFilters.vue'
-import BudgetTransferModal from '@/components/Utils/BudgetTransferModal.vue'
+import KpiCard from '@/components/Home/KpiCard.vue'
 import { rows as originalRows } from '@/Services/rows'
-import { ref, computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 const rows = ref([...originalRows])
 const visibleColumns = ref([])
+const totalprojects = ref(0)
+const totalbudget = ref(0)
+const totalreal = ref(0)
 
 const allMonths = [
-  'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre',
 ]
 
 // columnas base siempre visibles
-const baseColumns = [
-  { label: 'Proyecto', field: 'project' }
-]
+const baseColumns = [{ label: 'Proyecto', field: 'project' }]
 
 const totalsColumns = [
   { label: 'Total Presupuestado (COP)', field: 'total_budget_cop', type: 'total', currency: 'COP' },
@@ -29,93 +40,96 @@ const columns = computed(() => {
   if (!visibleColumns.value.length) {
     return [
       ...baseColumns,
-      ...allMonths.flatMap(month => ([
-        { label: `${capitalize(month)} Presupuestado`, field: `${month}_budget`, type: 'budget', currency: 'COP' },
-        { label: `${capitalize(month)} Real`, field: `${month}_real`, type: 'real', currency: 'COP' }
-      ])),
-      ...totalsColumns
+      ...allMonths.flatMap((month) => [
+        {
+          label: `${capitalize(month)} Presupuestado`,
+          field: `${month}_budget`,
+          value: `${month}`,
+          type: 'budget',
+          currency: 'COP',
+        },
+        {
+          label: `${capitalize(month)} Real`,
+          field: `${month}_real`,
+          value: `${month}`,
+          type: 'real',
+          currency: 'COP',
+        },
+      ]),
+      ...totalsColumns,
     ]
   }
 
-  const filteredMonthCols = visibleColumns.value.flatMap(month => ([
-    { label: `${capitalize(month)} Presupuestado`, field: `${month}_budget`, type: 'budget', currency: 'COP' },
-    { label: `${capitalize(month)} Real`, field: `${month}_real`, type: 'real', currency: 'COP' }
-  ]))
+  const filteredMonthCols = visibleColumns.value.flatMap((month) => [
+    {
+      label: `${capitalize(month)} Presupuestado`,
+      field: `${month}_budget`,
+      value: `${month}`,
+      type: 'budget',
+      currency: 'COP',
+    },
+    {
+      label: `${capitalize(month)} Real`,
+      field: `${month}_real`,
+      value: `${month}`,
+      type: 'real',
+      currency: 'COP',
+    },
+  ])
 
-
-  return [
-    ...baseColumns,
-    ...filteredMonthCols,
-    ...totalsColumns
-  ]
+  return [...baseColumns, ...filteredMonthCols, ...totalsColumns]
 })
+
+const calculateTotals = (data, months) => {
+  let totalBudget = 0
+  let totalReal = 0
+
+  const result = data.map((row) => {
+    const budget = months.reduce((sum, m) => sum + (row[`${m}_budget`] || 0), 0)
+    const real = months.reduce((sum, m) => sum + (row[`${m}_real`] || 0), 0)
+
+    totalBudget += budget
+    totalReal += real
+
+    return {
+      ...row,
+      total_budget_cop: budget,
+      total_budget_usd: budget / 4000,
+      total_real_cop: real,
+      total_real_usd: real / 4000,
+    }
+  })
+
+  totalbudget.value = totalBudget
+  totalreal.value = totalReal
+  totalprojects.value = result.length
+
+  return result
+}
 
 const handleFilter = ({ projects, months }) => {
   visibleColumns.value = months
 
   let filtered = [...originalRows]
 
-  // Filtrar proyectos
+  // Filtrar por proyectos si hay selección
   if (projects.length) {
-    filtered = filtered.filter(row => projects.includes(row.project))
+    filtered = filtered.filter((row) => projects.includes(row.project))
   }
 
-  // Recalcular totales según los meses seleccionados
-  if (months.length) {
-    filtered = filtered.map(row => {
-      const totalBudget = months.reduce((sum, m) => sum + (row[`${m}_budget`] || 0), 0)
-      const totalReal = months.reduce((sum, m) => sum + (row[`${m}_real`] || 0), 0)
+  // Usa los meses seleccionados o todos si no hay ninguno
+  const activeMonths = months.length ? months : allMonths
 
-      return {
-        ...row,
-        total_budget_cop: totalBudget,
-        total_budget_usd: (totalBudget / 4000),
-        total_real_cop: totalReal,
-        total_real_usd: (totalReal / 4000)
-      }
-    })
-  }
-
-  rows.value = filtered
+  rows.value = calculateTotals(filtered, activeMonths)
 }
+
+// Cálculo inicial con todos los meses y todos los proyectos
+onMounted(() => {
+  visibleColumns.value = [...allMonths] // Mostrar todos los meses al inicio
+  rows.value = calculateTotals(originalRows, allMonths)
+})
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
-
-
-const showModal = ref(false)
-const selectedTransfer = ref(null)
-
-const projectList = computed(() => [...new Set(rows.value.map(r => r.project))])
-
-const openTransfer = (project, month) => {
-  const row = rows.value.find(r => r.project === project)
-  selectedTransfer.value = {
-    project,
-    month,
-    budget: row?.[`${month}_budget`] || 0,
-    real: row?.[`${month}_real`] || 0
-  }
-  showModal.value = true
-}
-
-const handleTransfer = ({ amount, from, to }) => {
-  const origin = rows.value.find(r => r.project === from.project)
-  const target = rows.value.find(r => r.project === to.project)
-
-  if (!origin || !target) return
-
-  const fromKey = `${from.month}_budget`
-  const toKey = `${to.month}_budget`
-
-  // Validar si hay suficiente
-  if (origin[fromKey] < amount) return alert('Fondos insuficientes')
-
-  origin[fromKey] -= amount
-  target[toKey] += amount
-
-  // Recalcular totales si es necesario
-}
-
 </script>
 
 <template>
@@ -127,18 +141,42 @@ const handleTransfer = ({ amount, from, to }) => {
     <div class="w-full flex flex-col px-6">
       <MultiFilters :rows="originalRows" @filter="handleFilter" />
 
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <KpiCard
+          class="bg-gray-100!"
+          title="Total Proyectos"
+          :value="totalprojects + ' proyectos'"
+          type="info"
+        />
+        <KpiCard
+          class="bg-blue-100!"
+          title="Presupuesto Total (COP)"
+          :value="
+            totalbudget.toLocaleString('es-CO', {
+              style: 'currency',
+              currency: 'COP',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })
+          "
+          type="success"
+        />
+        <KpiCard
+          class="bg-green-100!"
+          title="Ejecutado Real (COP)"
+          :value="
+            totalreal.toLocaleString('es-CO', {
+              style: 'currency',
+              currency: 'COP',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })
+          "
+          type="danger"
+        />
+      </div>
+
       <DataTable :columns="columns" :rows="rows" />
-
-      <BudgetTransferModal
-        :visible="showModal"
-        :source="selectedTransfer"
-        :projects="projectList"
-        @close="showModal = false"
-        @transfer="handleTransfer"
-      />
-
-
     </div>
-
   </div>
 </template>

@@ -60,7 +60,7 @@ const handleMouseLeave = () => {
         >
           <!-- Logo y nombre de la finca -->
           <RouterLink
-            to="main"
+            to="/main"
             :class="[
               'flex flex-col justify-center px-4 py-3 items-center gap-0 hover:bg-white cursor-default! list-none',
               !drawer.isExpanded && 'px-2',
@@ -102,9 +102,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace al bodylayout -->
           <RouterLink
-            to="main"
+            to="/main"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-4',
             ]"
           >
@@ -140,9 +140,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a rutas y georeferencia -->
           <RouterLink
-            to="proyectos"
+            to="/proyectos"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -178,9 +178,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a Calculo -->
           <RouterLink
-            to="calculo"
+            to="/calculo"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -217,9 +217,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a sgmwin -->
           <RouterLink
-            to="sgmwin"
+            :to="{ name: 'Pages externa', params: { name: 'sgmwin' } }"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -250,9 +250,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a fdim -->
           <RouterLink
-            to="fdim"
+            :to="{ name: 'Pages externa', params: { name: 'fdim' } }"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -283,13 +283,13 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a Mantenimiento -->
           <RouterLink
-            to="mantenimiento"
+            :to="{ name: 'Pages externa', params: { name: 'mantenimiento' } }"
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
-            <span>
+            <span class="w-6">
               <img src="../icons/icons8-link-96.png" alt="" width="24" height="24" />
             </span>
             <!-- Título del enlace -->
@@ -322,9 +322,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a support -->
           <RouterLink
-            to="support"
+            to=""
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -357,7 +357,7 @@ const handleMouseLeave = () => {
           <RouterLink
             to=""
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
@@ -388,9 +388,9 @@ const handleMouseLeave = () => {
         >
           <!-- Enlace a acerca de -->
           <RouterLink
-            to="about"
+            to=""
             :class="[
-              'flex items-center px-4 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
               !drawer.isExpanded && 'justify-center px-2',
             ]"
           >
