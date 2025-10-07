@@ -65,8 +65,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import TaskColumn from '@/components/Home/TaskColumn.vue'
-import Button from '@/components/Form/Button.vue'
-import Input from '@/components/Form/Input.vue'
+import Button from '@/components/form/Button.vue'
+import Input from '@/components/form/Input.vue'
 import BaseModal from '@/components/Utils/BaseModal.vue'
 import { lowPriorityTasks, mediumPriorityTasks, highPriorityTasks } from '@/Services/proyect'
 

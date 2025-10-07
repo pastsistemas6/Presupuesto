@@ -38,8 +38,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Button from '@/components/Form/Button.vue'
-import Input from '@/components/Form/Input.vue'
+import Button from '@/components/form/Button.vue'
+import Input from '@/components/form/Input.vue'
 
 const username = ref('')
 const password = ref('')
