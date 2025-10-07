@@ -1,32 +1,43 @@
+<script setup>
+import TaskCard from './TaskCard.vue'
+import draggable from 'vuedraggable'
+
+const props = defineProps({
+  title: String,
+  color: String,
+  modelValue: Array,
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const colorClass = `header-${props.color}`
+</script>
+
 <template>
   <div class="task-column">
     <div :class="['column-header', colorClass]">
       {{ title }}
     </div>
-    <div class="task-list">
-      <TaskCard
-        v-for="task in tasks"
-        :key="task.id"
-        :id="task.id"
-        :text="task.text"
-        :costo="task.costo"
-        :color="color"
-      />
-    </div>
+
+    <draggable
+      v-model="props.modelValue"
+      group="tasks"
+      item-key="id"
+      class="task-list"
+      @update:modelValue="newList => emit('update:modelValue', newList)"
+    >
+      <template #item="{ element }">
+        <TaskCard
+          :id="element.id"
+          :text="element.text"
+          :presupuestado="element.presupuestado"
+          :estado="element.estado"
+          :color="color"
+        />
+      </template>
+    </draggable>
   </div>
 </template>
-
-<script setup>
-import TaskCard from './TaskCard.vue'
-
-const props = defineProps({
-  title: String,
-  color: { type: String, default: 'green' },
-  tasks: { type: Array, default: () => [] },
-})
-
-const colorClass = `header-${props.color}`
-</script>
 
 <style scoped>
 .task-column {
@@ -64,5 +75,12 @@ const colorClass = `header-${props.color}`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border: 2px dashed transparent;
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+
+.task-list.dragging-over {
+  border-color: black;
 }
 </style>

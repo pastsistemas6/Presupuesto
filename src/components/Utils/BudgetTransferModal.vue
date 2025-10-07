@@ -4,7 +4,7 @@
     <h2 class="text-xl font-semibold mb-4 text-[#545386]">Transferir presupuesto</h2>
 
     <div class="text-sm text-gray-700 mb-4">
-      <p><strong>Desde:</strong> {{ source.project }} - {{ capitalize(source.month) }}</p>
+      <p><strong>Desde:</strong> {{ source.project }} - {{ source.month }}</p>
       <p>Presupuestado: {{ formatCOP(source.budget) }}</p>
       <p>Ejecutado (real): {{ formatCOP(source.real) }}</p>
     </div>

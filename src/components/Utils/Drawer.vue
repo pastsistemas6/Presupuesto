@@ -185,7 +185,7 @@ const handleMouseLeave = () => {
             ]"
           >
             <span>
-              <img src="../icons/audit-morado-24px-01.svg" alt="" width="24" height="24" />
+              <img src="../icons/table.svg" alt="" width="24" height="24" />
             </span>
             <!-- Título del enlace -->
             <span v-if="drawer.isExpanded" class="ml-2">Calculo</span>
@@ -290,7 +290,7 @@ const handleMouseLeave = () => {
             ]"
           >
             <span>
-              <img src="../icons/icons8-link-96.png" alt="" width="24" height="24" />
+              <img src="../icons/fdim.svg" alt="" width="24" height="24" />
             </span>
             <!-- Título del enlace -->
             <span v-if="drawer.isExpanded" class="ml-2">FDIM</span>

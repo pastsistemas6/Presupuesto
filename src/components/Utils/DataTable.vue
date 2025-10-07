@@ -24,7 +24,7 @@
             :key="colIndex"
             class="px-4 py-3 whitespace-wrap text-center font-medium cursor-pointer"
             :class="getCellClass_tbody(column.type)"
-            @click="openTransfer(row.project, column.value)"
+            @click="column.field === 'project' ? goToMovements(row.project) : openTransfer(row.project, column.value)"
           >
             {{ formatValue(row[column.field], column.currency) }}
           </td>
@@ -44,19 +44,28 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
 import BudgetTransferModal from './BudgetTransferModal.vue'
-import { columns } from '@/Services/columns'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
   columns: Array,
   rows: Array,
 })
 
+const router = useRouter()
 const showModal = ref(false)
 const selectedTransfer = ref(null)
 
 const projectList = computed(() => [...new Set(props.rows.map((r) => r.project))])
 
+const goToMovements = (projectName) => {
+  console.log('entra');
+
+  router.push({ name: 'Movements', params: { projectName } })
+}
+
 const openTransfer = (project, month) => {
+  console.log(month);
+
   const row = props.rows.find((r) => r.project == project)
   selectedTransfer.value = {
     project,

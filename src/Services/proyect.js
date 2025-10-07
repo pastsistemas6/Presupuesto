@@ -1,28 +1,54 @@
 export const lowPriorityTasks = [
-  { id: 1, text: 'Proyecto 1', costo: 12000000 },
-  { id: 2, text: 'Proyecto 2', costo: 1400000 },
-  { id: 7, text: 'Proyecto 7', costo: 5400000 },
-  { id: 8, text: 'Proyecto 8', costo: 600000 },
+  {
+    id: 1,
+    text: 'Instalación de cortinas de invernadero',
+    presupuestado: 8500000,
+    estado: 'Pendiente',
+  },
+  {
+    id: 2,
+    text: 'Mantenimiento de sistema de riego por goteo',
+    presupuestado: 3500000,
+    estado: 'En curso',
+  },
+  {
+    id: 3,
+    text: 'Limpieza y fumigación de invernaderos',
+    presupuestado: 1200000,
+    estado: 'Pendiente',
+  },
 ]
 
 export const mediumPriorityTasks = [
-  { id: 3, text: 'Proyecto 3' },
-  { id: 4, text: 'Proyecto 4', costo: 8050000 },
+  {
+    id: 4,
+    text: 'Optimización de fertilización automatizada',
+    presupuestado: 6200000,
+    estado: 'En curso',
+  },
+  {
+    id: 5,
+    text: 'Reparación de estructuras metálicas',
+    presupuestado: 2800000,
+    estado: 'Pendiente',
+  },
 ]
 
 export const highPriorityTasks = [
-  { id: 5, text: 'Proyecto 5', costo: 72300000 },
-  { id: 6, text: 'Proyecto 6', costo: 4900000 },
+  {
+    id: 6,
+    text: 'Exportación de lotes florales a Holanda',
+    presupuestado: 15000000,
+    estado: 'En curso',
+  },
+  {
+    id: 7,
+    text: 'Control sanitario post-cosecha',
+    presupuestado: 9300000,
+    estado: 'Pendiente',
+  },
 ]
 
-export const getAllLow = () => {
-  return lowPriorityTasks
-}
-
-export const getAllMedium = () => {
-  return mediumPriorityTasks
-}
-
-export const getAllHigh = () => {
-  return highPriorityTasks
-}
+export const getAllLow = () => lowPriorityTasks
+export const getAllMedium = () => mediumPriorityTasks
+export const getAllHigh = () => highPriorityTasks

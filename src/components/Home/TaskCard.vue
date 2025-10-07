@@ -1,36 +1,104 @@
 <template>
   <div
-    :class="[
-      'w-[99%] p-4 rounded-xl text-left flex justify-between items-center cursor-pointer hover:w-full hover:bg-gray-200! hover:duration-100',
-      colorClass,
-    ]"
+    :class="['task-card', colorClass]"
+    @click="handleAdd"
   >
     <p>{{ text }}</p>
-    <span class="py-1 px-2 bg-gray-100 rounded-md">{{ costo ? '$ ' + costo : '$ 0' }}</span>
+    <span class="py-1 px-2 bg-gray-100 rounded-md whitespace-nowrap">
+      {{ presupuestado ? '$ ' + presupuestado : '$ 0' }}
+    </span>
+
+    <Teleport to="body">
+      <BaseModal :visible="showModal" @close="closeModal">
+        <h2 class="text-xl font-semibold mb-4 text-[#545386]">Información detallada</h2>
+
+        <form class="space-y-4">
+          <Input
+            v-model="props.text"
+            label="Nombre del proyecto"
+            class="w-full"
+            type="text"
+            clase_label="label2"
+            clase_input="input1"
+            disabled
+          />
+
+          <Input
+            v-model="props.presupuestado"
+            label="Inversión del proyecto"
+            class="w-full"
+            type="number"
+            clase_label="label2"
+            clase_input="input1"
+            disabled
+          />
+
+          <Input
+            v-model="props.estado"
+            label="Estado actual"
+            class="w-full"
+            type="text"
+            clase_label="label2"
+            clase_input="input1"
+            disabled
+          />
+
+          <div class="text-right pt-2">
+            <Button type="button" @click="closeModal" class="bg-[#545386] text-white py-2!">
+              Cerrar
+            </Button>
+          </div>
+        </form>
+      </BaseModal>
+    </Teleport>
   </div>
 </template>
 
+
 <script setup>
 import { ref, defineProps } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import BaseModal from '../Utils/BaseModal.vue'
+import Button from '../form/Button.vue'
+import Input from '../form/Input.vue'
 
 const props = defineProps({
-  id: Intl,
+  id: Number,
   text: String,
-  costo: Intl,
+  presupuestado: Number,
+  estado: String,
   color: { type: String, default: 'green' },
 })
 
-const colorClass = `card-${props.color}`
+const showModal = ref(false)
 
-function enviar() {
-  router.push({ name: 'Reportes' })
+const handleAdd = () => {
+  showModal.value = true
 }
+
+const closeModal = () => {
+  showModal.value = false
+}
+
+const colorClass = `card-${props.color}`
 </script>
 
 <style scoped>
+.task-card {
+  width: 99%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.task-card:hover {
+  background-color: #f3f3f3;
+}
+
+
 .card-green {
   background-color: #dcf6d7;
 }
@@ -41,5 +109,20 @@ function enviar() {
 
 .card-red {
   background-color: #ffd4d4;
+}
+
+.card-green.sortable-ghost {
+  background-color: #bdf4b7 !important;
+  border: 2px dashed #6fcf97;
+}
+
+.card-yellow.sortable-ghost {
+  background-color: #fff3b0 !important;
+  border: 2px dashed #e1c542;
+}
+
+.card-red.sortable-ghost {
+  background-color: #ffb3b3 !important;
+  border: 2px dashed #ff6b6b;
 }
 </style>

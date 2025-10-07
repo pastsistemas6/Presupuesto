@@ -6,6 +6,7 @@ import Report from '@/Layouts/Home/Report.vue'
 import Main from '@/Layouts/Home/Main.vue'
 import HojaCalculo from '@/Layouts/Home/HojaCalculo.vue'
 import PagesExterna from '@/Layouts/Home/PagesExterna.vue'
+import Movements from '@/Layouts/Home/Movements.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,12 @@ const router = createRouter({
           path: '/calculo',
           name: 'Calculo',
           component: HojaCalculo,
+        },
+        {
+          path: '/movements/:projectName',
+          name: 'Movements',
+          component: Movements,
+          props: true,
         },
         {
           path: '/pages-externa/:name',
