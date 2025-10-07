@@ -59,7 +59,8 @@
 import { ref, computed, defineProps, defineEmits } from 'vue'
 import BaseModal from './BaseModal.vue'
 import Input from '@/components/form/Input.vue'
-import Button from '@/components/form/Button.vue'
+
+import Button from '../form/Button.vue'
 
 const props = defineProps({
   visible: Boolean,

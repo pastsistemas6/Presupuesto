@@ -102,7 +102,8 @@
 
 <script setup>
 import { ref, computed, defineProps, defineEmits, onMounted, onBeforeUnmount } from 'vue'
-import Button from '../Form/Button.vue'
+
+import Button from '../form/Button.vue'
 
 const props = defineProps({
   rows: Array,
