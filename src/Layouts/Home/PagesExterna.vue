@@ -2,8 +2,8 @@
   <div class="min-h-full py-2 pr-5 pb-6">
     <SystemInfoCard
       v-if="props.name == 'sgmwin'"
-      title="Integración con SGMWIN"
-      description="Aquí se hará la integración con los sistemas existentes de SGMWIN."
+      title="SGMWIN"
+      description="Para acceder a SGMWIN, haga click en el siguiente botón:"
       url="https://mantenimiento.eliteflower.com/"
     />
     <SystemInfoCard

@@ -203,6 +203,39 @@ const handleMouseLeave = () => {
           </Teleport>
         </li>
 
+        <!-- Reportes -->
+        <li
+          class="relative"
+          @mouseenter="(e) => handleMouseEnter(e, 'Reportes')"
+          @mouseleave="handleMouseLeave"
+        >
+          <!-- Enlace a Reportes -->
+          <RouterLink
+            to="/reportes"
+            :class="[
+              'flex items-center px-3 py-3 gap-2 hover:bg-gray-200 rounded-md',
+              !drawer.isExpanded && 'justify-center px-2',
+            ]"
+          >
+            <span>
+              <img src="../icons/audit-morado-24px-01.svg" alt="" width="24" height="24" />
+            </span>
+            <!-- Título del enlace -->
+            <span v-if="drawer.isExpanded" class="ml-2">Reportes</span>
+          </RouterLink>
+
+          <!-- Tooltip para el enlace Reportes -->
+          <Teleport to="#tooltip-container">
+            <div
+              v-if="!drawer.isExpanded && activeTooltip?.text === 'Reportes'"
+              :style="activeTooltip.style"
+              class="fixed z-50 bg-gray-200 text-sm px-2 py-1 rounded shadow-lg transition"
+            >
+              {{ activeTooltip.text }}
+            </div>
+          </Teleport>
+        </li>
+
         <!-- Plataformas Externas -->
         <div v-if="drawer.isExpanded" class="flex items-center gap-3 pr-2 py-3 cursor-default">
           <div class="bg-gray-200 px-3 py-[0.5px]"></div>
@@ -416,7 +449,7 @@ const handleMouseLeave = () => {
         <div v-if="drawer.isExpanded" class="bg-gray-200 px-3 py-[0.6px] mt-1 gap-2"></div>
 
         <!-- Mostrar la version del prototipo -->
-        <li v-if="drawer.isExpanded" class="list-none px-4 py-3">
+        <li v-if="drawer.isExpanded" class="list-none px-3 py-3">
           <span class="text-start hover:bg-white text-xs cursor-default!"
             >© 2025 Presupuesto. v1.0.0</span
           >

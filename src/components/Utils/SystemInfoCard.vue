@@ -1,7 +1,7 @@
 <!-- components/SystemInfoCard.vue -->
 <template>
-  <div class="rounded-lg shadow p-4 flex flex-col">
-    <h2 class="text-[#545386] font-bold text-3xl">{{ title }}</h2>
+  <div class="rounded-lg shadow py-4 flex flex-col">
+    <h2 class="text-[#545386] pl-6 font-bold text-3xl">{{ title }}</h2>
     <div class="bg-gray-200 mt-4 mb-6 px-3 py-[0.8px]"></div>
     <p class="mb-2 text-center">{{ description }}</p>
     <a
