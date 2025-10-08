@@ -1,71 +1,84 @@
-<!-- layouts/Movements.vue -->
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6 text-[#545386]">
-      Movimientos del Proyecto: {{ projectName }}
-    </h1>
+  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
+    <h2 class="w-full pl-8 text-2xl font-bold text-[#545386]">
+      Presupuesto del proyecto: {{ projectName }}
+    </h2>
 
-    <DataTable
-      :rows="[filteredProject]"
-      :columns="columns"
-    />
+    <div class="bg-gray-200 mt-4 mb-6 px-3 py-[0.8px]"></div>
 
-    <div class="mt-6 text-right">
-      <button
-        class="bg-[#545386] text-white px-4 py-2 rounded"
-        @click="showModal = true"
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-6">
+      <div
+        v-for="month in months"
+        :key="month"
+        class="border-3 border-gray-300 p-4 rounded-lg shadow-sm bg-gray-50"
       >
-        Registrar Movimiento
-      </button>
+        <h2 class="text-xl font-bold mb-2 text-center capitalize">
+          {{ month }}
+        </h2>
+
+        <ul class="space-y-2 text-center">
+          <li v-if="!hasBudget(month)">
+            <span class="text-gray-400 text-sm">Sin movimientos presupuestados</span>
+          </li>
+          <li v-else>
+            Presupuesto: {{ formatCurrency(filteredProject[`${month}_budget`] || 0) }}
+          </li>
+        </ul>
+
+        <div class="mt-4 text-center">
+          <RouterLink :to="{ name: 'BudgetMovements', params: { projectName, month } }">
+            <Button type="button" class="bg-[#545386] text-white py-2! text-sm! hover:underline hover:bg-gray-400">
+              Movimientos
+            </Button>
+          </RouterLink>
+
+        </div>
+      </div>
     </div>
 
-    <BudgetTransferModal
-      :visible="showModal"
-      :source="selectedTransfer"
-      :projects="projectList"
-      @close="showModal = false"
-      @transfer="handleTransfer"
-    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import Button from '@/components/form/Button.vue'
 import { useRoute } from 'vue-router'
 
-import DataTable from '@/components/Utils/DataTable.vue'
-import BudgetTransferModal from '@/components/Utils/BudgetTransferModal.vue'
-
 import { rows as allRows } from '@/Services/rows'
-import { columns } from '@/Services/columns'
 
 const route = useRoute()
 const projectName = route.params.projectName
 
-const showModal = ref(false)
-const selectedTransfer = ref(null)
+const months = [
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre'
+]
 
 const filteredProject = computed(() =>
   allRows.find((r) => r.project === projectName)
 )
 
-const projectList = computed(() => [...new Set(allRows.map((r) => r.project))])
+const formatCurrency = (value) => {
+  return value.toLocaleString('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+}
 
-const handleTransfer = ({ amount, from, to }) => {
-  const origin = allRows.find((r) => r.project === from.project)
-  const target = allRows.find((r) => r.project === to.project)
-
-  if (!origin || !target) return
-
-  const fromKey = `${from.month}_budget`
-  const toKey = `${to.month}_budget`
-
-  if (origin[fromKey] < amount) {
-    alert('Fondos insuficientes')
-    return
-  }
-
-  origin[fromKey] -= amount
-  target[toKey] += amount
+const hasBudget = (month) => {
+  const key = `${month}_budget`
+  return filteredProject.value?.[key] > 0
 }
 </script>

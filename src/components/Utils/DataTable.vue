@@ -24,7 +24,11 @@
             :key="colIndex"
             class="px-4 py-3 whitespace-wrap text-center font-medium cursor-pointer"
             :class="getCellClass_tbody(column.type)"
-            @click="column.field === 'project' ? goToMovements(row.project) : openTransfer(row.project, column.value)"
+            @click="
+              column.field === 'project'
+                ? goToMovements(row.project)
+                : openTransfer(row.project, column.value)
+            "
           >
             {{ formatValue(row[column.field], column.currency) }}
           </td>
@@ -32,6 +36,7 @@
       </tbody>
     </table>
   </div>
+
   <BudgetTransferModal
     :visible="showModal"
     :source="selectedTransfer"
@@ -58,20 +63,17 @@ const selectedTransfer = ref(null)
 const projectList = computed(() => [...new Set(props.rows.map((r) => r.project))])
 
 const goToMovements = (projectName) => {
-  console.log('entra');
-
   router.push({ name: 'Movements', params: { projectName } })
 }
 
 const openTransfer = (project, month) => {
-  console.log(month);
-
   const row = props.rows.find((r) => r.project == project)
   selectedTransfer.value = {
     project,
     month,
     budget: row?.[`${month}_budget`] || 0,
     real: row?.[`${month}_real`] || 0,
+    amount: row?.[`${month}_budget`] - row?.[`${month}_real`],
   }
   showModal.value = true
 }

@@ -24,7 +24,7 @@ const colorClass = `header-${props.color}`
       group="tasks"
       item-key="id"
       class="task-list"
-      @update:modelValue="newList => emit('update:modelValue', newList)"
+      @update:modelValue="(newList) => emit('update:modelValue', newList)"
     >
       <template #item="{ element }">
         <TaskCard

@@ -4,37 +4,30 @@
     <h2 class="text-xl font-semibold mb-4 text-[#545386]">Transferir presupuesto</h2>
 
     <div class="text-sm text-gray-700 mb-4">
-      <p><strong>Desde:</strong> {{ source.project }} - {{ source.month }}</p>
-      <p>Presupuestado: {{ formatCOP(source.budget) }}</p>
-      <p>Ejecutado (real): {{ formatCOP(source.real) }}</p>
+      <p><strong>Desde:</strong> {{ source.project }} - <strong>{{ capitalize(source.month) }}</strong></p>
+      <p><strong>Presupuestado:</strong> {{ formatCOP(source.budget) }}</p>
+      <p><strong>Ejecutado (real):</strong> {{ formatCOP(source.real) }}</p>
+      <p><strong>Monto (sobrante):</strong> {{ formatCOP(source.amount) }}</p>
     </div>
 
     <form @submit.prevent="handleTransfer" class="space-y-4">
       <Input
         v-model="amount"
-        value="0"
+        placeholder="0"
         label="Monto a transferir (COP)"
         type="number"
         clase_label="label2"
         clase_input="input2"
       />
 
-      <div>
-        <label class="block text-sm font-medium text-gray-600">Proyecto destino</label>
-        <select
-          v-model="targetProject"
-          class="mt-1 w-full border border-gray-300 rounded-md px-3 py-2"
-        >
-          <option
-            v-for="project in projects"
-            :key="project"
-            :value="project"
-            :disabled="project === source.project"
-          >
-            {{ project }}
-          </option>
-        </select>
-      </div>
+      <Input
+        v-model="note"
+        placeholder="Razón"
+        label="Descripción"
+        type="text"
+        clase_label="label2"
+        clase_input="input2"
+      />
 
       <div>
         <label class="block text-sm font-medium text-gray-600">Mes destino</label>
@@ -65,13 +58,12 @@ import Button from '../form/Button.vue'
 const props = defineProps({
   visible: Boolean,
   source: Object, // { project, month, budget, real }
-  projects: Array,
 })
 
 const emit = defineEmits(['close', 'transfer'])
 
-const amount = ref(0)
-const targetProject = ref('')
+const amount = ref()
+const note = ref('')
 const fecha = new Date()
 const mes = fecha.getMonth()
 
@@ -107,24 +99,25 @@ const handleTransfer = () => {
   console.log(amount.value)
   console.log(props.source.project)
   console.log(props.source.month)
-  console.log(targetProject.value)
   console.log(targetMonth.value)
 
   emit('transfer', {
-    amount: Number(amount.value),
+    project: props.source.project,
     from: {
-      project: props.source.project,
       month: props.source.month,
+      amount: Number(amount.value),
     },
     to: {
-      project: targetProject.value,
       month: targetMonth.value,
+      amount: Number(amount.value),
     },
+    note: note.value,
+    user: user.value,
   })
 
   // reset
   amount.value = 0
-  targetProject.value = ''
+  note.value = ''
   targetMonth.value = mes
   emit('close')
 }

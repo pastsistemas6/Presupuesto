@@ -1,11 +1,8 @@
 <template>
-  <div
-    :class="['task-card', colorClass]"
-    @click="handleAdd"
-  >
+  <div :class="['task-card', colorClass]" @click="handleAdd">
     <p>{{ text }}</p>
     <span class="py-1 px-2 bg-gray-100 rounded-md whitespace-nowrap">
-      {{ presupuestado ? '$ ' + presupuestado : '$ 0' }}
+      {{ presupuestado ? formatCurrency(presupuestado) : '$ 0' }}
     </span>
 
     <Teleport to="body">
@@ -54,7 +51,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, defineProps } from 'vue'
 import BaseModal from '../Utils/BaseModal.vue'
@@ -79,6 +75,16 @@ const closeModal = () => {
   showModal.value = false
 }
 
+const formatCurrency = (value) => {
+  return value.toLocaleString('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+}
+
+
 const colorClass = `card-${props.color}`
 </script>
 
@@ -97,7 +103,6 @@ const colorClass = `card-${props.color}`
 .task-card:hover {
   background-color: #f3f3f3;
 }
-
 
 .card-green {
   background-color: #dcf6d7;

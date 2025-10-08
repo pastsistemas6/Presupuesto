@@ -7,6 +7,7 @@ import Main from '@/Layouts/Home/Main.vue'
 import HojaCalculo from '@/Layouts/Home/HojaCalculo.vue'
 import PagesExterna from '@/Layouts/Home/PagesExterna.vue'
 import Movements from '@/Layouts/Home/Movements.vue'
+import BudgetMovements from '@/Layouts/Home/BudgetMovements.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,12 @@ const router = createRouter({
           path: '/movements/:projectName',
           name: 'Movements',
           component: Movements,
+          props: true,
+        },
+        {
+          path: '/movimientos/:projectName/:month?',
+          name: 'BudgetMovements',
+          component: BudgetMovements,
           props: true,
         },
         {
