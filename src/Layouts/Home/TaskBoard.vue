@@ -30,6 +30,7 @@
             type="text"
             clase_label="label2"
             clase_input="input2"
+            required
           />
 
           <Input
@@ -40,6 +41,7 @@
             type="number"
             clase_label="label2"
             clase_input="input2"
+            required
           />
 
           <div>

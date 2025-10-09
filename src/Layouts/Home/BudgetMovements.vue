@@ -35,9 +35,9 @@
       <!-- Filtro monto min -->
       <div>
         <Input
-          type="number"
+          type="text"
           label="Monto mínimo"
-          v-model.number="filterAmountMin"
+          v-model="formattedAmountMin"
           placeholder="0"
           clase_label="label2"
           clase_input="input2"
@@ -46,9 +46,9 @@
       <!-- Filtro monto max -->
       <div>
         <Input
-          type="number"
+          type="text"
           label="Monto máximo"
-          v-model.number="filterAmountMax"
+          v-model="formattedAmountMax"
           placeholder="0"
           clase_label="label2"
           clase_input="input2"
@@ -84,7 +84,16 @@
 
 
     <div class="absolute bottom-8 right-8">
-      <Button @click="openTransfer(projectName, month)" class="w-full bg-[#545386] text-white">Agregar movimiento</Button>
+      <Button
+        @click="openTransfer(projectName, month)"
+        :disabled="!canAddMovement"
+        :class="[
+          'w-full',
+          canAddMovement ? 'bg-[#545386] hover:bg-[#3e3c61] text-white' : 'bg-gray-300 text-white cursor-not-allowed'
+        ]"
+      >
+        Agregar movimiento
+      </Button>
     </div>
 
     <BudgetTransferModal
@@ -121,6 +130,25 @@ const filterDateTo = ref('')
 const filterAmountMin = ref(null)
 const filterAmountMax = ref(null)
 const showModal = ref(false)
+
+const monthsList = [
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+]
+
+// Índice del mes actual (0 = Enero)
+const currentMonthIndex = new Date().getMonth()
+
+// Índice del mes en la ruta (por ejemplo "Febrero" => 1)
+const routeMonthIndex = computed(() => {
+  return month ? monthsList.findIndex(m => m.toLowerCase() === month.toLowerCase()) : null
+})
+
+// true si el mes es actual o futuro
+const canAddMovement = computed(() => {
+  return routeMonthIndex.value !== null && routeMonthIndex.value >= currentMonthIndex
+})
+
 
 function parseDateString(dateStr) {
   if (!dateStr) return null
@@ -205,6 +233,33 @@ const formatCurrency = (value) =>
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })
+
+// Computado para mostrar Monto Mínimo formateado
+const formattedAmountMin = computed({
+  get() {
+    return filterAmountMin.value != null
+      ? formatCurrency(filterAmountMin.value)
+      : ''
+  },
+  set(val) {
+    const num = parseInt(val.replace(/\D/g, ''), 10)
+    filterAmountMin.value = isNaN(num) ? null : num
+  }
+})
+
+// Computado para mostrar Monto Máximo formateado
+const formattedAmountMax = computed({
+  get() {
+    return filterAmountMax.value != null
+      ? formatCurrency(filterAmountMax.value)
+      : ''
+  },
+  set(val) {
+    const num = parseInt(val.replace(/\D/g, ''), 10)
+    filterAmountMax.value = isNaN(num) ? null : num
+  }
+})
+
 
 const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 

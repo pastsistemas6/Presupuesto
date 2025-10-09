@@ -32,7 +32,7 @@
       <div
         class="px-4 py-2 pb-3 border-b border-b-gray-300 text-center text-md font-normal text-black"
       >
-        <span class="text-[#545386]">{{ role }}</span>
+        <span class="text-[#545386] cursor-default">{{ role }}</span>
       </div>
       <Button
         @click="cerrar"

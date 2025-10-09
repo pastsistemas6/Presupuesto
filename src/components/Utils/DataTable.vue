@@ -27,7 +27,7 @@
             @click="
               column.field === 'project'
                 ? goToMovements(row.project)
-                : openTransfer(row.project, column.value)
+                : (isFutureOrCurrentMonth(column.value) && openTransfer(row.project, column.value))
             "
           >
             {{ formatValue(row[column.field], column.currency) }}
@@ -61,6 +61,20 @@ const showModal = ref(false)
 const selectedTransfer = ref(null)
 
 const projectList = computed(() => [...new Set(props.rows.map((r) => r.project))])
+const monthsList = [
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+]
+
+const currentMonthIndex = new Date().getMonth()
+
+const isFutureOrCurrentMonth = (monthLabel) => {
+  const index = monthsList.findIndex(
+    m => m.toLowerCase() === (monthLabel || '').toLowerCase()
+  )
+  return index >= currentMonthIndex
+}
+
 
 const goToMovements = (projectName) => {
   router.push({ name: 'Movements', params: { projectName } })

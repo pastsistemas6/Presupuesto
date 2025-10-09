@@ -9,6 +9,7 @@
       :disabled="props.disabled"
       @input="$emit('update:modelValue', $event.target.value)"
       :class="props.clase_input"
+      :required="props.required"
     />
     <p v-if="error" class="error">{{ props.error }}</p>
   </div>
@@ -27,6 +28,7 @@ const props = defineProps({
   clase_label: String,
   error: String,
   disabled: Boolean,
+  required: Boolean,
 })
 
 defineEmits(['update:modelValue'])
@@ -82,7 +84,10 @@ defineEmits(['update:modelValue'])
 
 .error {
   color: red;
+  background-color: rgba(255, 0, 0, 0.112);
   font-size: 0.875rem;
   margin-top: 0.3rem;
+  padding: 10px 10px;
+  border-radius: 6px;
 }
 </style>

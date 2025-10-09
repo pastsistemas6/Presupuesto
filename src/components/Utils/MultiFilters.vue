@@ -11,7 +11,7 @@
 
       <div
         v-if="showProjects"
-        class="absolute z-10 mt-2 w-72 divide-y-2 divide-gray-300 max-h-56 overflow-auto bg-white border-2 border-gray-400 rounded shadow-md px-3 py-2"
+        class="absolute z-10 mt-2 w-72 divide-y-2 divide-gray-300 max-h-56 overflow-auto bg-white border-2 border-gray-400 rounded-lg shadow-md px-3 py-2"
       >
         <div class="flex justify-between items-center">
           <p v-if="selectedProjects.length" class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2">
@@ -46,14 +46,14 @@
     <div class="relative">
       <Button
         @click="toggleDropdown('months')"
-        class="px-5! py-2.5! text-sm! rounded-md bg-gray-200 text-gray-800 hover:bg-gray-400 hover:text-white"
+        class="px-5! py-2.5! text-sm! bg-gray-200 text-gray-800 hover:bg-gray-400 hover:text-white"
       >
         Meses
       </Button>
 
       <div
         v-if="showMonths"
-        class="absolute z-10 mt-2 w-54 max-h-56 divide-y-2 divide-gray-300 overflow-auto bg-white border-2 border-gray-400 rounded shadow-md px-3 py-2"
+        class="absolute z-10 mt-2 w-54 max-h-56 divide-y-2 divide-gray-300 overflow-auto bg-white border-2 border-gray-400 rounded-lg shadow-md px-3 py-2"
       >
         <div class="flex justify-between items-center">
           <p v-if="selectedMonths.length" class="text-sm! font-bold text-blue-600 px-1 py-1 mb-2">

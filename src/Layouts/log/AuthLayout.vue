@@ -30,7 +30,7 @@
     </div>
 
     <div class="w-7/12">
-      <Button @click="login" class="w-full py-4! text-xl! bg-[#545386] text-white">Ingresar</Button>
+      <Button @click="login" type="submit" class="w-full py-4! text-xl! bg-[#545386] text-white">Ingresar</Button>
     </div>
   </div>
 </template>
