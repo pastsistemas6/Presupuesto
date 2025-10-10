@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-full py-2 pr-5 pb-6">
+  <div class="min-h-full py-2 pr-5 pb-6 cursor-default">
     <SystemInfoCard
       v-if="props.name == 'sgmwin'"
       title="SGMWIN"

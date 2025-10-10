@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
+  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg cursor-default">
     <h2 class="w-full pl-8 text-4xl font-bold text-[#545386] mb-4">Resumen de presupuesto</h2>
     <p class="w-full px-8 pr-20 mb-8">
       Elite Flower es una empresa líder en la industria de las flores, dedicada a la producción y

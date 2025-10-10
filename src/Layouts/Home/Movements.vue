@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
+  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg cursor-default">
     <h2 class="w-full pl-8 text-2xl font-bold text-[#545386]">
       Presupuesto del proyecto: {{ projectName }}
     </h2>

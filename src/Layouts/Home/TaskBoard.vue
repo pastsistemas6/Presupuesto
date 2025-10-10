@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
+  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg cursor-default">
     <h2 class="w-full pl-8 text-4xl font-bold text-[#545386]">Gestión de proyectos</h2>
     <div class="bg-gray-200 mt-4 mb-6 px-3 py-[0.8px]"></div>
     <div class="grid grid-cols-41 place-items-start px-6">

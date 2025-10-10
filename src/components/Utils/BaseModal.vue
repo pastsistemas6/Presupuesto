@@ -2,7 +2,7 @@
   <transition name="fade">
     <div
       v-if="visible"
-      class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[4px] bg-black/30"
+      class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[4px] bg-black/30 cursor-default"
       @click.self="emitClose"
     >
       <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative z-20">

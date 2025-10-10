@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg">
+  <div class="pt-4 pb-6 flex flex-col shadow-sm rounded-lg cursor-default">
     <div class="flex flex-nowrap items-center justify-between mb-2 px-8">
       <Button @click="goBack" class="bg-[#545386] text-white py-2.5! hover:underline">
         ← Volver al presupuesto
