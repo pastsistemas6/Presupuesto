@@ -1,4 +1,6 @@
 // src/data/budgetMovements.js
+
+// Datos simulados de movimientos presupuestarios para proyectos
 export const budgetMovements = [
   {
     project: 'Cortinas Automatizadas',

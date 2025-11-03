@@ -1,3 +1,6 @@
+// src/stores/cart.js
+// Ejemplo de una tienda Pinia simple para un contador
+// El codigo no funciona ya que es solo un ejemplo base
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 

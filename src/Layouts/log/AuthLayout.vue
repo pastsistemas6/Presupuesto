@@ -17,6 +17,8 @@
         id="username"
         clase_input="input1"
         clase_label="label1"
+        :error="error_name"
+        required
       />
       <Input
         v-model="password"
@@ -26,27 +28,52 @@
         id="password"
         clase_input="input1"
         clase_label="label1"
+        :error="error_password"
+        required
       />
     </div>
 
     <div class="w-7/12">
-      <Button @click="login" type="submit" class="w-full py-4! text-xl! bg-[#545386] text-white">Ingresar</Button>
+      <Button
+        @click="handleLogin"
+        type="submit"
+        class="w-full py-4! text-xl! bg-[#545386] text-white"
+      >
+        Ingresar
+      </Button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, defineEmits } from 'vue'
+import Input from '@/components/Form/Input.vue'
+import Button from '@/components/Form/Button.vue'
 
-import Button from '@/components/form/Button.vue'
-import Input from '@/components/form/Input.vue'
+const emit = defineEmits(['login-started'])
 
 const username = ref('')
 const password = ref('')
-const router = useRouter()
+const error_name = ref('')
+const error_password = ref('')
 
-const login = () => {
-  router.push({ name: 'Main' })
+const handleLogin = () => {
+  // Validar campos
+  if (username.value == '' && password.value == '') {
+    error_name.value = 'Ingresa tu información';
+    error_password.value = 'Ingresa tu información';
+    return;
+  } else if (username.value == '') {
+    error_name.value = 'Ingresa tu nombre';
+    error_password.value = ''
+    return;
+  } else if (password.value == '') {
+    error_password.value = 'Ingresa tu contraseña';
+    error_name.value = ''
+    return;
+  }
+
+  // Si la validación pasa, emitir evento de inicio de login
+  emit('login-started')
 }
 </script>

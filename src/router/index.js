@@ -10,7 +10,10 @@ import Movements from '@/Layouts/Home/Movements.vue'
 import BudgetMovements from '@/Layouts/Home/BudgetMovements.vue'
 
 const router = createRouter({
+  // Historia de navegación basada en el API History del navegador
   history: createWebHistory(import.meta.env.BASE_URL),
+
+  // Definición de todas las rutas de la aplicación
   routes: [
     {
       path: '/',

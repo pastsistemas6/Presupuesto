@@ -1,5 +1,7 @@
+// Tasa de conversión de COP a USD
 const COP_TO_USD = 4000
 
+// Definición de las filas de datos para la tabla de presupuesto
 export const rows = [
   {
     project: 'Cortinas Automatizadas',
@@ -209,6 +211,7 @@ rows.forEach((row) => {
     'diciembre',
   ]
 
+  // Constantes para los totales
   const totalBudget = months.reduce((sum, m) => sum + (row[`${m}_budget`] || 0), 0)
   const totalReal = months.reduce((sum, m) => sum + (row[`${m}_real`] || 0), 0)
 

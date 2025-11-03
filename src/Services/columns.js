@@ -1,3 +1,4 @@
+// Constantes para los nombres de los meses en español
 const months = [
   'Enero',
   'Febrero',
@@ -13,6 +14,7 @@ const months = [
   'Diciembre',
 ]
 
+// Definición de las columnas para la tabla de presupuesto
 export const columns = [
   { label: 'Proyecto', field: 'project', type: 'project' },
   ...months.flatMap((mes) => [
