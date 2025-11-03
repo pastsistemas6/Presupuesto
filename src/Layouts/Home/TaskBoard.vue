@@ -240,9 +240,9 @@
 import { ref, computed, onMounted } from 'vue'
 import TaskColumn from '@/components/Home/TaskColumn.vue'
 import MultiFilters from '@/components/Utils/MultiFilters.vue';
-import Input from '@/components/Form/Input.vue';
+import Input from '@/components/form/Input.vue';
 import BaseModal from '@/components/Utils/BaseModal.vue';
-import Button from '@/components/Form/Button.vue';
+import Button from '@/components/form/Button.vue';
 import { data, lowPriorityTasks, mediumPriorityTasks, highPriorityTasks } from '@/Services/proyect'
 
 // Estados reactivos para datos y filtros
