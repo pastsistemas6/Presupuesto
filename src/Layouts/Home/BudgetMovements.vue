@@ -118,10 +118,10 @@ import { useRoute, useRouter } from 'vue-router'
 import DataTable from '@/components/Utils/DataTable.vue'
 import { budgetMovements as originalBudgetMovements } from '@/Services/budgetMovements'
 import { rows } from '@/Services/rows'
-import Input from '@/components/Form/Input.vue'
+import Input from '@/components/form/Input.vue'
 import BaseModal from '@/components/Utils/BaseModal.vue'
 import BudgetTransferModal from '@/components/Utils/BudgetTransferModal.vue'
-import Button from '@/components/Form/Button.vue'
+import Button from '@/components/form/Button.vue'
 
 // ===== ROUTER Y ESTADO REACTIVO =====
 const route = useRoute()

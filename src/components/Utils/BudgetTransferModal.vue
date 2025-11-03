@@ -143,8 +143,8 @@
 <script setup>
 import { ref, computed, watch, defineProps, defineEmits } from 'vue'
 import BaseModal from './BaseModal.vue'
-import Input from '../Form/Input.vue'
-import Button from '../Form/Button.vue'
+import Input from '../form/Input.vue'
+import Button from '../form/Button.vue'
 import { rows } from '@/Services/rows'
 import { budgetMovements } from '@/Services/budgetMovements'
 
