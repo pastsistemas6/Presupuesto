@@ -51,7 +51,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import Button from '@/components/Form/Button.vue'
+import Button from '@/components/form/Button.vue'
 import { useRoute } from 'vue-router'
 import { rows as allRows } from '@/Services/rows'
 
