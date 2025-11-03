@@ -148,8 +148,8 @@
 <script setup>
 import { ref, computed, defineProps, defineEmits } from 'vue'
 import BaseModal from '../Utils/BaseModal.vue'
-import Button from '../Form/Button.vue'
-import Input from '../Form/Input.vue'
+import Button from '../form/Button.vue'
+import Input from '../form/Input.vue'
 
 // Props del componente
 const props = defineProps({

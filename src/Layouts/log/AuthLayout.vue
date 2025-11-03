@@ -47,8 +47,8 @@
 
 <script setup>
 import { ref, defineEmits } from 'vue'
-import Input from '@/components/Form/Input.vue'
-import Button from '@/components/Form/Button.vue'
+import Input from '@/components/form/Input.vue'
+import Button from '@/components/form/Button.vue'
 
 const emit = defineEmits(['login-started'])
 
